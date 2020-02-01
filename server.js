@@ -87,14 +87,20 @@ app.post('/api/v1/versions', async (request, response) => {
     }
 });
 
-// app.delete('/api/v1/characters/:id', async (request, response) => {
-//     try {
-//         const character = await database('characters').where('id', request.params.id).del()
-//         character.length ? response.status(200).json(character) : response.status(404).json({error: `Could not delete ${request.params.id}`});
-//     } catch (error) {
-//         response.status(500).json({ error })
-//     }
-// })
+app.delete('/api/v1/characters/:id', async (request, response) => {
+    try {
+        const character = await database('characters').where('id', request.params.id)
+        
+        if (character.length > 0) {
+            await database('characters').where('id', request.params.id).del()
+            response.status(200).send('character deleted')
+        } else {
+            response.status(422).json({error: ` no record found for id ${request.params.id}`});
+        }
+    } catch (error) {
+        response.status(500).json({ error })
+    }
+})
 
 app.listen(app.get('port'), () => {
     console.log(`Server is running on http://localhost:${app.get('port')}.`)
