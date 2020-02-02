@@ -106,6 +106,15 @@ app.get('/', (request, response) => {
     response.status(200).send("dale")
 })
 
+app.get('/', (req, res) => {
+    res.status(200).send('You have come to the right place');
+  });
+  app.get('*', (req, res) => {
+    res
+      .status(404)
+      .send('404: Not found');
+  });
+
 app.listen(app.get('port'), () => {
     console.log(`Server is running on http://localhost:${app.get('port')}.`)
 })
