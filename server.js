@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 
 app.set('port', process.env.PORT || 3001);
-app.use(express.json())
+app.use(express.json());
 app.use(cors());
 
 app.get('/api/v1/characters', async (request, response) => {
