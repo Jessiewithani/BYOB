@@ -102,6 +102,10 @@ app.delete('/api/v1/characters/:id', async (request, response) => {
     }
 })
 
+app.get('/', (request, response) => {
+    response.status(200).send("dale")
+})
+
 app.listen(app.get('port'), () => {
     console.log(`Server is running on http://localhost:${app.get('port')}.`)
 })
