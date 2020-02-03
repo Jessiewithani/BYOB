@@ -96,9 +96,9 @@ app.delete('/api/v1/characters/:id', async (request, response) => { //our expres
         
         if (character.length > 0) { //if the data has a length that is greater than 0
             await database('characters').where('id', request.params.id).del() //retrieve from the database to access the characters table, find the id that matches the parmas in the endpoint, then delete it.
-            response.status(200).send('character deleted') //returns a status code that means that the response was successful.
+            response.status(200).send(`character with id number ${request.params.id} successfully deleted!`) //returns a status code that means that the response was successful.
         } else { //otherwise
-            response.status(422).json({error: ` no record found for id ${request.params.id}`}); //returns a status code of 422 that means unprocessable entity. Returns an error of a parsed text, clarify which id is not found. 
+            response.status(422).json({error: ` no record found for id number ${request.params.id}`}); //returns a status code of 422 that means unprocessable entity. Returns an error of a parsed text, clarify which id is not found. 
         }
     } catch (error) { //if an error occurs
         response.status(500).json({ error }) //gives back a status code of 500 which means there is a server error. Returns an error that is parsed.
